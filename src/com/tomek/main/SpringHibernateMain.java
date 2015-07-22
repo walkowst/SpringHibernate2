@@ -27,7 +27,7 @@ public class SpringHibernateMain {
 		person.setName("Xiao");
 		person.setCountry("China");
 		
-//		personDAO.save(person);
+		personDAO.save(person);
 		
 		System.out.println("Person::"+ person);
 		

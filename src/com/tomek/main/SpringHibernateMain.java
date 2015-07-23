@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.tomek.dao.PersonDAO;
+import com.tomek.dao.VehicleDAO;
 import com.tomek.model.Person;
+import com.tomek.model.Vehicle;
 /**
  * Main class
  * Project created to test integration of Spring 4.1.6 and Hibernate 4.3.10
@@ -27,7 +29,7 @@ public class SpringHibernateMain {
 		person.setName("John");
 		person.setCountry("USA");
 		
-		personDAO.save(person);
+//		personDAO.save(person);
 		
 		System.out.println("Person::"+ person);
 		
@@ -35,6 +37,21 @@ public class SpringHibernateMain {
 		
 		for(Person p : list)
 			System.out.println("Person list::" + p);
+		
+		VehicleDAO vehicleDAO = context.getBean(VehicleDAO.class);
+		
+		Vehicle vehicle = new Vehicle();
+		vehicle.setType("Car");
+		vehicle.setModel("Peugeot");
+		
+		vehicleDAO.save(vehicle);
+
+		System.out.println("Vehicle::"+ vehicle);
+		
+		List<Vehicle> vehicleList = vehicleDAO.list();
+		for(Vehicle v : vehicleList)
+			System.out.println("Vehicle list::"+v);
+		
 		
 		context.close();
 	}

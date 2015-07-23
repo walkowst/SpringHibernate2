@@ -24,10 +24,10 @@ public class SpringHibernateMain {
 		PersonDAO personDAO = context.getBean(PersonDAO.class);
 		
 		Person person = new Person();
-		person.setName("Xiao");
-		person.setCountry("China");
+		person.setName("John");
+		person.setCountry("USA");
 		
-//		personDAO.save(person);
+		personDAO.save(person);
 		
 		System.out.println("Person::"+ person);
 		

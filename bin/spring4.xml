@@ -23,6 +23,8 @@
             <list>
                 <value>com.tomek.model.Person</value>
                 <value>com.tomek.model.Vehicle</value>
+                <value>com.tomek.model.TwoWheeler</value>
+                <value>com.tomek.model.FourWheeler</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -35,7 +37,8 @@
         </property>
     </bean>
  
-     
+    
+     <!-- DAO Beans definitions -->
     <bean id="personDAO" class="com.tomek.dao.PersonDAOImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </bean>
@@ -43,4 +46,32 @@
     <bean id="vehicleDAO" class="com.tomek.dao.VehicleDAOImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </bean>
+    
+    <bean id="twoWheelerDAO" class="com.tomek.dao.TwoWheelerDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
+    
+    <bean id="fourWheelerDAO" class="com.tomek.dao.FourWheelerDAOImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
+    
+    
+    <!-- Model Beans definitions -->
+    <bean id="person" class="com.tomek.model.Person">
+    	<property name="name" value="Default Name"></property>
+    	<property name="country" value="Default Country"></property>
+    </bean>
+    
+    <bean id="vehicle" class="com.tomek.model.Vehicle" >
+    	<property name="name" value="Default vehicle name" />
+    </bean>
+    
+    <bean id="twoWheeler" class="com.tomek.model.TwoWheeler" parent="vehicle" >
+    	<property name="steeringHandle" value="Default Steering Handle Name" />
+    </bean>
+    
+    <bean id="fourWheeler" class="com.tomek.model.FourWheeler" parent="vehicle" >
+    	<property name="steeringWheel" value="Default Steereing Wheel Name" />
+    </bean>
+    
 </beans>

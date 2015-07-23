@@ -5,18 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Vehicle")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Vehicle {
 
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String type;
-	private String model;
+	private String name;
 	
 	public int getId() {
 		return id;
@@ -24,21 +26,17 @@ public class Vehicle {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getType() {
-		return type;
+	
+	public String getName() {
+		return name;
 	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public String getModel() {
-		return model;
-	}
-	public void setModel(String model) {
-		this.model = model;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public String toString(){
-		return "id= "+id+", type= "+type+", model= "+model;
+		return "id= "+id+", name= "+name;
 	}
+	
 	
 }

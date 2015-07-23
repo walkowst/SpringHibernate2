@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.tomek.dao.FourWheelerDAO;
 import com.tomek.dao.PersonDAO;
+import com.tomek.dao.TwoWheelerDAO;
 import com.tomek.dao.VehicleDAO;
+import com.tomek.model.FourWheeler;
 import com.tomek.model.Person;
+import com.tomek.model.TwoWheeler;
 import com.tomek.model.Vehicle;
 /**
  * Main class
@@ -24,34 +28,35 @@ public class SpringHibernateMain {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring4.xml");
 		
 		PersonDAO personDAO = context.getBean(PersonDAO.class);
+		TwoWheelerDAO twDAO = context.getBean(TwoWheelerDAO.class);
+		FourWheelerDAO fwDAO = context.getBean(FourWheelerDAO.class);
 		
-		Person person = new Person();
-		person.setName("John");
-		person.setCountry("USA");
+		Person person = (Person) context.getBean("person");
+//		person.setName("John");
+//		person.setCountry("USA");
 		
-//		personDAO.save(person);
+		TwoWheeler twoWheeler = (TwoWheeler) context.getBean("twoWheeler");
+//		twoWheeler.setName("Super Bike");
+//		twoWheeler.setSteeringHandle("Hummer");
 		
-		System.out.println("Person::"+ person);
+		FourWheeler fourWheeler = (FourWheeler) context.getBean("fourWheeler");
+		fourWheeler.setName("Polonez");
+		fourWheeler.setSteeringWheel("Wheel");
 		
+		twDAO.save(twoWheeler);
+		fwDAO.save(fourWheeler);
 		List<Person> list = personDAO.list();
+		List<TwoWheeler> twoWheelerList = twDAO.list();
+		List<FourWheeler> fourWheelerList = fwDAO.list();
 		
-		for(Person p : list)
-			System.out.println("Person list::" + p);
+//		for(Person p : list)
+//			System.out.println("Person list::" + p);
 		
-		VehicleDAO vehicleDAO = context.getBean(VehicleDAO.class);
+		for(TwoWheeler tw : twoWheelerList)
+			System.out.println("Two Wheeler list::" + tw);
 		
-		Vehicle vehicle = new Vehicle();
-		vehicle.setType("Car");
-		vehicle.setModel("Peugeot");
-		
-		vehicleDAO.save(vehicle);
-
-		System.out.println("Vehicle::"+ vehicle);
-		
-		List<Vehicle> vehicleList = vehicleDAO.list();
-		for(Vehicle v : vehicleList)
-			System.out.println("Vehicle list::"+v);
-		
+		for(FourWheeler fw : fourWheelerList)
+			System.out.println("Four Wheeler list::" + fw);
 		
 		context.close();
 	}
